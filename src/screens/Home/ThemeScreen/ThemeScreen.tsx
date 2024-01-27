@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 
-const ThemeScreen = ({ route }) => {
+const ThemeScreen = ({ route, navigation }) => {
   const { theme } = route.params;
 
   const [rating, setRating] = useState("");
@@ -119,14 +119,15 @@ const ThemeScreen = ({ route }) => {
         />
       </View>
       <TouchableOpacity
-        onPress={() =>
+        onPress={() => {
           generateStory({
             text: storyline,
             theme: theme,
             age_rating: rating,
             word_count: wordCount,
-          })
-        }
+          }),
+            navigation.navigate("NarratorVoices");
+        }}
         style={styles.createButton}
       >
         <Text style={styles.ratingText}>Create Story</Text>
