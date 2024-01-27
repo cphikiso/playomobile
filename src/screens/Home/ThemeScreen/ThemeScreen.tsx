@@ -5,15 +5,45 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 
 const ThemeScreen = ({ route }) => {
-  const [rating, setRating] = useState("");
-
   const { theme } = route.params;
+
+  const [rating, setRating] = useState("");
+  const [wordCount, setWordCount] = useState("100");
+  const [storyline, setStoryline] = useState(theme);
+
+  async function generateStory({ text, theme, age_rating, word_count }) {
+    try {
+      const response = await fetch(
+        "https://generate-story-omsnazusfa-uc.a.run.app",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text, theme, age_rating, word_count }),
+        }
+      );
+      if (response.status == 200) {
+        const data = await response;
+
+        if (data) {
+          console.log("data returned", data);
+        } else {
+          Alert.alert("Error telling the story");
+        }
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+      console.warn(error);
+    }
+  }
 
   return (
     <SafeAreaView
@@ -67,32 +97,37 @@ const ThemeScreen = ({ route }) => {
           </TouchableOpacity>
         </View>
 
+        {/* story line  */}
+        <Text style={styles.sectionTitle}>Story line</Text>
+        <TextInput
+          multiline
+          maxLength={300}
+          style={[
+            styles.textinput,
+            { marginBottom: 16, height: 200, paddingTop: 12 },
+          ]}
+          onChangeText={(count) => setWordCount(count)}
+        />
+
         {/* word * count */}
         <Text style={styles.sectionTitle}>Word Count</Text>
         <TextInput
           keyboardType="number-pad"
           maxLength={6}
-          style={{
-            backgroundColor: "rgba(0,0,0,0.1)",
-            height: 48,
-            borderRadius: 12,
-            borderCurve: "continuous",
-            paddingHorizontal: 16,
-            fontSize: 16,
-            fontWeight: "500",
-          }}
+          style={styles.textinput}
+          onChangeText={(count) => setWordCount(count)}
         />
       </View>
       <TouchableOpacity
-        style={{
-          backgroundColor: "black",
-          justifyContent: "center",
-          alignItems: "center",
-          paddingVertical: 16,
-          borderRadius: 16,
-          borderCurve: "continuous",
-          marginHorizontal: 16,
-        }}
+        onPress={() =>
+          generateStory({
+            text: storyline,
+            theme: theme,
+            age_rating: rating,
+            word_count: wordCount,
+          })
+        }
+        style={styles.createButton}
       >
         <Text style={styles.ratingText}>Create Story</Text>
       </TouchableOpacity>

@@ -30,4 +30,22 @@ export const styles = StyleSheet.create({
     borderCurve: "continuous",
   },
   ratingText: { fontSize: 18, color: "#fff", fontWeight: "700" },
+  textinput: {
+    backgroundColor: "rgba(0,0,0,0.1)",
+    height: 48,
+    borderRadius: 12,
+    borderCurve: "continuous",
+    paddingHorizontal: 16,
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  createButton: {
+    backgroundColor: "black",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 16,
+    borderRadius: 16,
+    borderCurve: "continuous",
+    marginHorizontal: 16,
+  },
 });
