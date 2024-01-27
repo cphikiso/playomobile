@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "../screens/HomeScreen";
+import HomeScreen from "../screens/Home/HomeScreen";
+import ThemeScreen from "../screens/Home/ThemeScreen/ThemeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ function AppNavigator() {
         }
       >
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="ThemeConfirm" component={ThemeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

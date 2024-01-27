@@ -1,9 +1,15 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 
-const ThemeTile = () => {
+import { useNavigation } from "@react-navigation/native";
+
+const ThemeTile = ({ title }) => {
+  const navigation = useNavigation();
   return (
     <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("ThemeConfirm", { theme: title });
+      }}
       style={{
         height: 100,
         backgroundColor: "rgba(0,0,0,0.2)",
@@ -11,10 +17,11 @@ const ThemeTile = () => {
         alignItems: "center",
         borderRadius: 22,
         borderCurve: "continuous",
+        marginBottom: 16,
       }}
     >
       <Text style={{ fontWeight: "700", fontSize: 28, color: "#fff" }}>
-        Theme
+        {title}
       </Text>
     </TouchableOpacity>
   );
