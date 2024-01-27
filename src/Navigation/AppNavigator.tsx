@@ -16,7 +16,11 @@ function AppNavigator() {
         }
       >
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="ThemeConfirm" component={ThemeScreen} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="ThemeConfirm"
+          component={ThemeScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

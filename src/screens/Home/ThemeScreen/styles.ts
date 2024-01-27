@@ -7,13 +7,19 @@ export const styles = StyleSheet.create({
     paddingTop: 28,
     paddingHorizontal: 16,
   },
-  title: { fontSize: 28, fontWeight: "900", textAlign: "center" },
+  title: {
+    fontSize: 28,
+    fontWeight: "900",
+    textAlign: "center",
+    marginBottom: 28,
+  },
   subtitle: {
     marginBottom: 16,
     fontSize: 22,
     fontWeight: "500",
     //textAlign: "center",
   },
+  sectionTitle: { fontSize: 16, fontWeight: "500", marginBottom: 10 },
   ratingView: {
     width: 80,
     backgroundColor: "grey",
