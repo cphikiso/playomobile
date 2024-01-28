@@ -7,7 +7,7 @@ import {
   TextInput,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 
@@ -17,6 +17,7 @@ const ThemeScreen = ({ route, navigation }) => {
   const [rating, setRating] = useState("");
   const [wordCount, setWordCount] = useState("100");
   const [storyline, setStoryline] = useState(theme);
+  const [storyData, setStoryData] = useState();
 
   async function generateStory({ text, theme, age_rating, word_count }) {
     try {
@@ -30,20 +31,35 @@ const ThemeScreen = ({ route, navigation }) => {
           body: JSON.stringify({ text, theme, age_rating, word_count }),
         }
       );
-      if (response.status == 200) {
-        const data = await response;
+
+      if (response.ok) {
+        const data = await response.text(); // Get the response as a string
 
         if (data) {
-          console.log("data returned", data);
+          console.log("Data returned", data);
+          setStoryData(JSON.parse(data));
         } else {
           Alert.alert("Error telling the story");
         }
+      } else {
+        // Handle non-OK responses, e.g., response.status 415 (Unsupported Media Type)
+        console.log("Response not OK:", response.statusText);
       }
     } catch (error) {
       Alert.alert(error.message);
       console.warn(error);
     }
   }
+
+  console.log("data", storyData?.document_id);
+
+  useEffect(() => {
+    if (storyData?.document_id) {
+      return navigation.navigate("NarratorVoices", {
+        storyId: storyData?.document_id,
+      });
+    }
+  }, [storyData]);
 
   return (
     <SafeAreaView
@@ -117,6 +133,7 @@ const ThemeScreen = ({ route, navigation }) => {
           style={styles.textinput}
           onChangeText={(count) => setWordCount(count)}
         />
+        {/* <Text>{}</Text> */}
       </View>
       <TouchableOpacity
         onPress={() => {
@@ -125,8 +142,8 @@ const ThemeScreen = ({ route, navigation }) => {
             theme: theme,
             age_rating: rating,
             word_count: wordCount,
-          }),
-            navigation.navigate("NarratorVoices");
+          });
+          // navigation.navigate("NarratorVoices");
         }}
         style={styles.createButton}
       >
