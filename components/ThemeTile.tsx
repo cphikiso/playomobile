@@ -1,10 +1,35 @@
-import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
+import Animated, {
+  FadeIn,
+  FadeInLeft,
+  FadeInRight,
+  FadeOutLeft,
+  FadeOutRight,
+  Layout,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import { useEffect, useState } from "react";
+import {
+  Button,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
+import { COLORS } from "./LoadingIndicator";
+import { LoadingIndicator } from "./LoadingIndicator";
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 import { useNavigation } from "@react-navigation/native";
 
 const ThemeTile = ({ title }) => {
   const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -12,7 +37,7 @@ const ThemeTile = ({ title }) => {
       }}
       style={{
         height: 100,
-        backgroundColor: "rgba(0,0,0,0.2)",
+        backgroundColor: "#000",
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 22,
