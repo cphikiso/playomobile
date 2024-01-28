@@ -11,25 +11,26 @@ function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={
-          {
-            // headerShown: false
-          }
-        }
+        screenOptions={{
+          // headerShown: false
+          headerShadowVisible: false,
+          title: "",
+          headerTintColor: "#000",
+        }}
       >
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen
-          options={{ headerShown: false }}
+          // options={{ headerShown: false }}
           name="ThemeConfirm"
           component={ThemeScreen}
         />
         <Stack.Screen
-          options={{ headerShown: false }}
+          options={{ title: "Choose narrator's voice" }}
           name="NarratorVoices"
           component={NarratorVoicesScreen}
         />
         <Stack.Screen
-          options={{ headerShown: false }}
+          // options={{ headerShown: false }}
           name="StoryScreen"
           component={StoryScreen}
         />

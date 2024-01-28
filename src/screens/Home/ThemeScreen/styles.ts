@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../../../components/LoadingIndicator";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 28,
+    // paddingTop: 28,
     paddingHorizontal: 16,
   },
   title: {
@@ -19,10 +20,15 @@ export const styles = StyleSheet.create({
     fontWeight: "500",
     //textAlign: "center",
   },
-  sectionTitle: { fontSize: 16, fontWeight: "500", marginBottom: 10 },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 10,
+    color: "#AEAEB2",
+  },
   ratingView: {
     width: 80,
-    backgroundColor: "grey",
+    backgroundColor: "#D1D1D6",
     justifyContent: "center",
     alignItems: "center",
     height: 52,
@@ -31,7 +37,7 @@ export const styles = StyleSheet.create({
   },
   ratingText: { fontSize: 18, color: "#fff", fontWeight: "700" },
   textinput: {
-    backgroundColor: "rgba(0,0,0,0.1)",
+    backgroundColor: "#F2F2F7",
     height: 48,
     borderRadius: 12,
     borderCurve: "continuous",
@@ -47,5 +53,10 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
     borderCurve: "continuous",
     marginHorizontal: 16,
+  },
+  txt: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: COLORS.darkBlue,
   },
 });
